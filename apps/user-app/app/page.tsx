@@ -1,12 +1,13 @@
-import Image, { type ImageProps } from "next/image";
+"use client";
 
-import styles from "./page.module.css";
+import { Appbar } from "@repo/ui/appbar";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Home() {
+  const session = useSession();
   return (
-    <div className={styles.page}>
-      <h1>Welcome to User App</h1>
-      <Image src="/logo.png" alt="Repo Logo" width={200} height={200} />
+    <div>
+      <Appbar onSignin={signIn} onSignout={signOut} user={session.data?.user} />
     </div>
   );
 }
